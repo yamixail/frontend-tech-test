@@ -1,0 +1,6 @@
+{
+  "extends": "travix",
+  "rules": {
+    "comma-dangle": ["error", "always-multiline", {"functions": "never"}]
+  }
+}
