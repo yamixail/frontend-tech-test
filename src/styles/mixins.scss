@@ -1,0 +1,11 @@
+@mixin less-then-phablets {
+  @media (max-width: $less-then-phablets) { @content; }
+}
+
+@mixin less-then-tablets {
+  @media (max-width: $less-then-tablets) { @content; }
+}
+
+@mixin less-then-desktop {
+  @media (max-width: $less-then-desktop) { @content; }
+}

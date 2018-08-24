@@ -1,0 +1,73 @@
+.tasks-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.task {
+  width: calc(100% / 4);
+  padding: 10px;
+  box-sizing: border-box;
+
+  @include less-then-desktop {
+    width: calc(100% / 3);
+  }
+
+  @include less-then-tablets {
+    width: calc(100% / 2);
+  }
+
+  @include less-then-phablets {
+    width: calc(100% / 1);
+  }
+
+  &__title {
+    background-color: $main-color;
+    color: $white;
+    padding: 10px;
+  }
+
+  &__title-edit {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  &__description {
+    border: 1px solid $main-color;
+    padding: 10px;
+  }
+
+  &__description-edit {
+    width: 100%;
+    height: 200px;
+  }
+
+  &__delete, &__edit {
+    float: right;
+    color: $red;
+    font-size: 30px;
+    line-height: 25px;
+    cursor: pointer;
+    background: none;
+    border: 0;
+  }
+
+  &__edit {
+    font-size: 15px;
+    line-height: 25px;
+  }
+
+  &__edit-submit, &__edit-cancel {
+    width: 50%;
+    border: 0;
+    color: white;
+  }
+
+  &__edit-submit {
+    background: $green;
+  }
+
+  &__edit-cancel {
+    background: $red;
+  }
+}
