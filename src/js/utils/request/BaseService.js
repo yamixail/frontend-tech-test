@@ -3,19 +3,16 @@ export default class BaseService {
     this.apiUrl = apiUrl;
   }
 
-  post(url, data) {
-    return fetch(`${this.apiUrl}${url}`, {
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      method: 'POST',
-      body: JSON.stringify(data),
-    });
+  post(url) {
+    return fetch(`${this.apiUrl}${url}`, { method: 'POST' });
   }
 
   get(url) {
     return fetch(`${this.apiUrl}${url}`);
+  }
+
+  put(url) {
+    return fetch(`${this.apiUrl}${url}`, { method: 'PUT' });
   }
 
   delete(url) {

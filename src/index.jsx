@@ -6,6 +6,7 @@ import { createStore } from 'redux';
 import rootReducer from './js/reducers';
 import App from './js/components/App';
 
+import './styles/bootstrap.min.css';
 import './styles/index.scss';
 
 const store = createStore(rootReducer);

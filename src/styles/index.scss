@@ -27,6 +27,11 @@ $red: #e83e8c;
     padding: 10px;
   }
 
+  &__title-edit {
+    width: 100%;
+    margin-top: 10px;
+  }
+
   &__description {
     border: 1px solid $main-color;
     padding: 10px;

@@ -3,6 +3,11 @@ export const addTask = payload => ({
   payload,
 });
 
+export const updateTask = payload => ({
+  type: 'UPDATE_TASK',
+  payload,
+});
+
 export const updateTasks = payload => ({
   type: 'UPDATE_TASKS_LIST',
   payload,

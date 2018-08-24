@@ -78,7 +78,8 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
     if (task !== null) {
       task.title = req.params.title;
       task.description = req.params.description;
-      return res.status(204);
+
+      return res.status(200).json(task);
     }
 
     return res.status(404).json({
@@ -101,17 +102,17 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
  * Return status code 201.
  */
 app.post('/task/create/:title/:description', (req, res) => {
+  const lastTask = tasksContainer.tasks[tasksContainer.tasks.length - 1];
+
   const task = {
-    id: tasksContainer.tasks.length,
+    id: lastTask.id + 1,
     title: req.params.title,
     description: req.params.description,
   };
 
   tasksContainer.tasks.push(task);
 
-  return res.status(201).json({
-    message: 'Resource created',
-  });
+  return res.status(201).json(task);
 });
 
 /**
@@ -128,13 +129,13 @@ app.delete('/task/delete/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
-    const task = tasksContainer.tasks.find(item => item.id === id);
+    const taskIndex = tasksContainer.tasks.findIndex(item => item.id === id);
 
-    if (task !== null) {
-      const taskIndex = tasksContainer.tasks;
+    if (taskIndex !== -1) {
       tasksContainer.tasks.splice(taskIndex, 1);
+
       return res.status(200).json({
-        message: 'Updated successfully',
+        message: 'Deleted successfully',
       });
     }
 
