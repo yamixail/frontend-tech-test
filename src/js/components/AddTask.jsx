@@ -57,13 +57,30 @@ class AddTask extends PureComponent {
   }
 
   render() {
+    const { titleValue, descriptionValue } = this.state;
+
     return (
       <div className="task-create-form">
         <h2>Add task</h2>
         <form onSubmit={this.onFormSubmit}>
-          <input className="task-create-form__title" placeholder="Title" onChange={this.onTitleChange} />
-          <textarea className="task-create-form__description" placeholder="Description" onChange={this.onDescriptionChange} />
-          <button className="task-create-form__button" type="submit">Submit</button>
+          <input
+            className="task-create-form__title"
+            placeholder="Title"
+            onChange={this.onTitleChange}
+            value={titleValue}
+          />
+          <textarea
+            className="task-create-form__description"
+            placeholder="Description"
+            onChange={this.onDescriptionChange}
+            value={descriptionValue}
+          />
+          <button
+            className="task-create-form__button"
+            type="submit"
+          >
+            Submit
+          </button>
         </form>
       </div>
     );
