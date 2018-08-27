@@ -14,8 +14,13 @@ class AddTask extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.getTitleRef = this.getTitleRef.bind(this);
-    this.getDescriptionRef = this.getDescriptionRef.bind(this);
+    this.state = {
+      titleValue: '',
+      descriptionValue: '',
+    };
+
+    this.onTitleChange = this.onTitleChange.bind(this);
+    this.onDescriptionChange = this.onDescriptionChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
   }
 
@@ -23,8 +28,9 @@ class AddTask extends PureComponent {
     e.preventDefault();
 
     const { addTask } = this.props;
-    const title = this.titleRef.value.trim();
-    const description = this.descriptionRef.value.trim();
+    const { titleValue, descriptionValue } = this.state;
+    const title = titleValue.trim();
+    const description = descriptionValue.trim();
 
     if (!title) {
       return;
@@ -34,18 +40,20 @@ class AddTask extends PureComponent {
       .then((task) => {
         addTask(task);
 
-        this.titleRef.value = '';
-        this.descriptionRef.value = '';
+        this.setState({
+          titleValue: '',
+          descriptionValue: '',
+        });
       })
       .catch(logger.error);
   }
 
-  getTitleRef(element) {
-    this.titleRef = element;
+  onTitleChange(e) {
+    this.setState({ titleValue: e.target.value });
   }
 
-  getDescriptionRef(element) {
-    this.descriptionRef = element;
+  onDescriptionChange(e) {
+    this.setState({ descriptionValue: e.target.value });
   }
 
   render() {
@@ -53,8 +61,8 @@ class AddTask extends PureComponent {
       <div className="task-create-form">
         <h2>Add task</h2>
         <form onSubmit={this.onFormSubmit}>
-          <input className="task-create-form__title" placeholder="Title" ref={this.getTitleRef} />
-          <textarea className="task-create-form__description" placeholder="Description" ref={this.getDescriptionRef} />
+          <input className="task-create-form__title" placeholder="Title" onChange={this.onTitleChange} />
+          <textarea className="task-create-form__description" placeholder="Description" onChange={this.onDescriptionChange} />
           <button className="task-create-form__button" type="submit">Submit</button>
         </form>
       </div>
@@ -66,8 +74,8 @@ AddTask.propTypes = {
   addTask: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = dispatch => ({
-  addTask: value => dispatch(addTaskAction(value)),
-});
+const mapActionsToProps = {
+  addTask: addTaskAction,
+};
 
-export default connect(null, mapDispatchToProps)(AddTask);
+export default connect(null, mapActionsToProps)(AddTask);

@@ -12,11 +12,15 @@ class Task extends PureComponent {
 
     this.state = {
       editMode: false,
+      title: props.title,
+      description: props.description,
     };
 
     this.onDelete = this.onDelete.bind(this);
     this.activeEditMode = this.activeEditMode.bind(this);
     this.deactiveEditMode = this.deactiveEditMode.bind(this);
+    this.onTitleChange = this.onTitleChange.bind(this);
+    this.onDescriptionChange = this.onDescriptionChange.bind(this);
     this.updateTask = this.updateTask.bind(this);
   }
 
@@ -29,6 +33,14 @@ class Task extends PureComponent {
       .catch(logger.error);
   }
 
+  onTitleChange(e) {
+    this.setState({ title: e.target.value });
+  }
+
+  onDescriptionChange(e) {
+    this.setState({ description: e.target.value });
+  }
+
   activeEditMode() {
     this.setState({ editMode: true });
   }
@@ -39,8 +51,9 @@ class Task extends PureComponent {
 
   updateTask() {
     const { id, updateTask } = this.props;
-    const title = this.titleRef.value.trim();
-    const description = this.descriptionRef.value.trim();
+    const { title: titleRaw, description: descriptionRaw } = this.state;
+    const title = titleRaw.trim();
+    const description = descriptionRaw.trim();
 
     if (!title) {
       return;
@@ -76,8 +89,8 @@ class Task extends PureComponent {
   }
 
   renderTitle() {
-    const { id, title } = this.props;
-    const { editMode } = this.state;
+    const { id } = this.props;
+    const { editMode, title } = this.state;
 
     if (!editMode) {
       return `${id}. ${title}`;
@@ -85,8 +98,8 @@ class Task extends PureComponent {
 
     return (
       <input
+        onChange={this.onTitleChange}
         className="task__title-edit"
-        ref={(el) => { this.titleRef = el; }}
         placeholder="Title"
         defaultValue={title}
       />
@@ -94,8 +107,7 @@ class Task extends PureComponent {
   }
 
   renderDescription() {
-    const { description } = this.props;
-    const { editMode } = this.state;
+    const { editMode, description } = this.state;
 
     if (!editMode) {
       return description;
@@ -103,7 +115,7 @@ class Task extends PureComponent {
 
     return (
       <textarea
-        ref={(el) => { this.descriptionRef = el; }}
+        onChange={(e) => { this.setState({ description: e.target.value }); }}
         className="task__description-edit"
         placeholder="Description"
         defaultValue={description}

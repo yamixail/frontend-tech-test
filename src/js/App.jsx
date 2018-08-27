@@ -1,8 +1,8 @@
 import React from 'react';
 import { hot } from 'react-hot-loader';
 
-import AddTask from '../containers/AddTask';
-import TasksList from './TasksList';
+import AddTask from './components/AddTask';
+import TasksList from './components/TasksList';
 
 const App = () => (
   <div>
