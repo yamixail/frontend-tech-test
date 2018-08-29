@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TaskView should render 1`] = `
+<div
+  className="task"
+>
+  <div
+    className="task__title"
+  >
+    <button
+      className="task__delete"
+      onClick={[Function]}
+      title="delete task"
+      type="button"
+    >
+      ×
+    </button>
+    <button
+      className="task__edit"
+      onClick={[Function]}
+      title="edit task"
+      type="button"
+    >
+      ✎
+    </button>
+    1. Title
+  </div>
+  <div
+    className="task__description"
+  >
+    Lorem ipsum dolor sit amet
+  </div>
+</div>
+`;

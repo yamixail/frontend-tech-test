@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-import request from '../../utils/request';
-import Logger from '../../utils/Logger';
+import request from '../utils/request';
+import Logger from '../utils/Logger';
 
 const logger = new Logger({ namespace: 'TaskEdit' });
 
@@ -84,14 +84,10 @@ class TaskEdit extends PureComponent {
   }
 }
 
-TaskEdit.defaultProps = {
-  description: '',
-};
-
 TaskEdit.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
-  description: PropTypes.string,
+  description: PropTypes.string.isRequired,
   updateTask: PropTypes.func.isRequired,
   deactivateEditMode: PropTypes.func.isRequired,
   deleteTask: PropTypes.func.isRequired,

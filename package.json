@@ -4,10 +4,21 @@
   "description": "test back - front",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --hot --progress --open --mode development --devtool source-map",
+    "build": "webpack --mode production",
     "server": "node server.js",
-    "build": "webpack --mode production"
+    "start": "webpack-dev-server --hot --progress --open --mode development --devtool source-map",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
+  },
+  "jest": {
+    "setupFiles": [
+      "./test/jest-setup.js",
+      "./test/enzyme-setup.js"
+    ],
+    "snapshotSerializers": [
+      "<rootDir>/node_modules/enzyme-to-json/serializer"
+    ]
   },
   "keywords": [
     "test",
@@ -38,12 +49,19 @@
     "webpack-cli": "^3.1.0"
   },
   "devDependencies": {
+    "babel-jest": "^23.4.2",
+    "enzyme": "^3.5.0",
+    "enzyme-adapter-react-16": "^1.3.0",
+    "enzyme-to-json": "^3.3.4",
     "eslint": "^5.4.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-travix": "^5.0.3",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.1",
+    "jest": "^23.5.0",
+    "react-addons-test-utils": "^15.6.2",
+    "react-test-renderer": "^16.4.2",
     "webpack-dev-server": "^3.1.5"
   }
 }

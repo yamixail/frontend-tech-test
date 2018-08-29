@@ -22,14 +22,10 @@ class TaskView extends PureComponent {
   }
 }
 
-TaskView.defaultProps = {
-  description: '',
-};
-
 TaskView.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
-  description: PropTypes.string,
+  description: PropTypes.string.isRequired,
   activateEditMode: PropTypes.func.isRequired,
   deleteTask: PropTypes.func.isRequired,
 };

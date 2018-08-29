@@ -1,11 +1,11 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-import request from '../../utils/request';
-import Logger from '../../utils/Logger';
+import request from '../utils/request';
+import Logger from '../utils/Logger';
 
-import TaskEdit from './Edit';
-import TaskView from './View';
+import TaskEdit from '../components/TaskEdit';
+import TaskView from '../components/TaskView';
 
 const logger = new Logger({ namespace: 'Task' });
 
@@ -70,14 +70,10 @@ class Task extends PureComponent {
   }
 }
 
-Task.defaultProps = {
-  description: '',
-};
-
 Task.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
-  description: PropTypes.string,
+  description: PropTypes.string.isRequired,
   updateTask: PropTypes.func.isRequired,
   deleteTask: PropTypes.func.isRequired,
 };
