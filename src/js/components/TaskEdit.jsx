@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-import request from '../utils/request';
 import Logger from '../utils/Logger';
 
 const logger = new Logger({ namespace: 'TaskEdit' });
@@ -17,7 +16,7 @@ class TaskEdit extends PureComponent {
 
     this.onTitleChange = this.onTitleChange.bind(this);
     this.onDescriptionChange = this.onDescriptionChange.bind(this);
-    this.onTaskUpdate = this.onTaskUpdate.bind(this);
+    this.updateTask = this.updateTask.bind(this);
   }
 
   onTitleChange(e) {
@@ -28,7 +27,7 @@ class TaskEdit extends PureComponent {
     this.setState({ description: e.target.value });
   }
 
-  onTaskUpdate() {
+  updateTask() {
     const { id, updateTask, deactivateEditMode } = this.props;
     const { title: titleRaw, description: descriptionRaw } = this.state;
     const title = titleRaw.trim();
@@ -44,12 +43,8 @@ class TaskEdit extends PureComponent {
       description,
     };
 
-    request.tasks
-      .update(task)
-      .then((updatedTask) => {
-        deactivateEditMode();
-        updateTask(updatedTask);
-      })
+    updateTask(task)
+      .then(deactivateEditMode)
       .catch(logger.error);
   }
 
@@ -60,7 +55,14 @@ class TaskEdit extends PureComponent {
     return (
       <div className="task">
         <div className="task__title">
-          <button type="button" title="delete task" className="task__delete" onClick={deleteTask}>&times;</button>
+          <button
+            type="button"
+            title="delete task"
+            className="task__delete"
+            onClick={deleteTask}
+          >
+            &times;
+          </button>
 
           <input
             onChange={this.onTitleChange}
@@ -77,8 +79,20 @@ class TaskEdit extends PureComponent {
             value={description}
           />
         </div>
-        <button type="button" className="task__edit-submit" onClick={this.onTaskUpdate}>Submit</button>
-        <button type="button" className="task__edit-cancel" onClick={deactivateEditMode}>Cancel</button>
+        <button
+          type="button"
+          className="task__edit-submit"
+          onClick={this.updateTask}
+        >
+          Submit
+        </button>
+        <button
+          type="button"
+          className="task__edit-cancel"
+          onClick={deactivateEditMode}
+        >
+          Cancel
+        </button>
       </div>
     );
   }

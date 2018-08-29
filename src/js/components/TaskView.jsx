@@ -10,8 +10,22 @@ class TaskView extends PureComponent {
     return (
       <div className="task">
         <div className="task__title">
-          <button type="button" title="delete task" className="task__delete" onClick={deleteTask}>&times;</button>
-          <button type="button" title="edit task" className="task__edit" onClick={activateEditMode}>&#9998;</button>
+          <button
+            type="button"
+            title="delete task"
+            className="task__delete"
+            onClick={deleteTask}
+          >
+            &times;
+          </button>
+          <button
+            type="button"
+            title="edit task"
+            className="task__edit"
+            onClick={activateEditMode}
+          >
+            &#9998;
+          </button>
           {`${id}. ${title}`}
         </div>
         <div className="task__description">

@@ -3,12 +3,11 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import {
-  updateTasks as updateTasksList,
+  fetchTasks as fetchTasksList,
   updateTask as updateOneTask,
   removeTask,
 } from '../actions/tasks';
 
-import request from '../utils/request';
 import Logger from '../utils/Logger';
 
 import Task from './Task';
@@ -17,12 +16,9 @@ const logger = new Logger({ namespace: 'TaskList' });
 
 class TasksList extends PureComponent {
   componentWillMount() {
-    const { updateTasks } = this.props;
+    const { fetchTasks } = this.props;
 
-    request.tasks
-      .all()
-      .then(({ tasks }) => updateTasks(tasks))
-      .catch(logger.error);
+    fetchTasks().catch(logger.error);
   }
 
   render() {
@@ -31,7 +27,12 @@ class TasksList extends PureComponent {
     return (
       <div className="tasks-container">
         {tasks.map(task => (
-          <Task key={task.id} updateTask={updateTask} deleteTask={deleteTask} {...task} />
+          <Task
+            key={task.id}
+            updateTask={updateTask}
+            deleteTask={deleteTask}
+            {...task}
+          />
         ))}
       </div>
     );
@@ -58,7 +59,7 @@ const mapStateToProps = ({ tasks }) => ({
 
 const mapActionsToProps = {
   updateTask: updateOneTask,
-  updateTasks: updateTasksList,
+  fetchTasks: fetchTasksList,
   deleteTask: removeTask,
 };
 

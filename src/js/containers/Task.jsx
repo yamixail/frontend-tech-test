@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-import request from '../utils/request';
 import Logger from '../utils/Logger';
 
 import TaskEdit from '../components/TaskEdit';
@@ -25,10 +24,7 @@ class Task extends PureComponent {
   onDelete() {
     const { id, deleteTask } = this.props;
 
-    request.tasks
-      .remove(id)
-      .then(() => deleteTask(id))
-      .catch(logger.error);
+    deleteTask(id).catch(logger.error);
   }
 
   activateEditMode() {

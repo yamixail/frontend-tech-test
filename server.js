@@ -6,7 +6,10 @@ app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
 
   // Request methods you wish to allow
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+  res.setHeader(
+    'Access-Control-Allow-Methods',
+    'GET, POST, OPTIONS, PUT, DELETE'
+  );
 
   // Request headers you wish to allow
   res.setHeader('Access-Control-Allow-Headers', 'content-type');
@@ -98,7 +101,8 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
  * title: string
  * description: string
  *
- * Add a new task to the array tasksContainer.tasks with the given title and description.
+ * Add a new task to the array tasksContainer.tasks with the given title and
+ * description.
  * Return status code 201.
  */
 app.post('/task/create/:title/:description', (req, res) => {

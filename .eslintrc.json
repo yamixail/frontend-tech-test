@@ -1,6 +1,7 @@
 {
-  "extends": "travix",
+  "extends": ["travix", "prettier"],
   "rules": {
-    "comma-dangle": ["error", "always-multiline", {"functions": "never"}]
+    "comma-dangle": ["error", "always-multiline", {"functions": "never"}],
+    "max-len": ["error", { "code": 80 }]
   }
 }
